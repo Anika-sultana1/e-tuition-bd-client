@@ -16,7 +16,7 @@ const MyTuitions = () => {
     }
   });
 
-  const getStatusBadge = (status) => {
+  const handleStatusBadge = (status) => {
     switch (status.toLowerCase()) {
       case 'approved':
         return (
@@ -41,6 +41,20 @@ const MyTuitions = () => {
     }
   };
 
+const handleTuitionPayment = async(tuition)=>{
+  const paymentInfo = {
+    email:tuition.email,
+studentName:tuition.name,
+tuitionId:tuition._id,
+budget:tuition.budget,
+  }
+
+const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
+window.location.assign(res.data.url)
+
+}
+
+
   return (
     <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-center">My Tuitions</h2>
@@ -53,6 +67,7 @@ const MyTuitions = () => {
             <th>Class</th>
             <th>Location</th>
             <th>Status</th>
+            <th> Payment Status</th>
             <th>Salary</th>
             <th>Phone</th>
             <th>Days</th>
@@ -68,7 +83,8 @@ const MyTuitions = () => {
               <td>{tuition.subject}</td>
               <td>{tuition.class}</td>
               <td>{tuition.location}</td>
-              <td>{getStatusBadge(tuition.status)}</td>
+              <td>{handleStatusBadge(tuition.status)}</td>
+              <p onClick={()=>handleTuitionPayment(tuition)} className=" py-1 px-1 text-center bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md transition">Pay</p>
               <td>{tuition.budget}</td>
               <td>{tuition.phoneNumber}</td>
               <td>{tuition.days}</td>
@@ -80,6 +96,8 @@ const MyTuitions = () => {
                 <button className="btn btn-sm btn-error flex items-center gap-1">
                   <FaTrash /> Remove
                 </button>
+  
+
               </td>
             </tr>
           ))}
