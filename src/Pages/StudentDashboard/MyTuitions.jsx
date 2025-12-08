@@ -8,13 +8,15 @@ const MyTuitions = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: tuitions = [] } = useQuery({
+  const { data: tuitions = [], } = useQuery({
     queryKey: ['tuitions', user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/tuitions?email=${user?.email}`);
       return res.data;
     }
   });
+
+const paidTuitions = tuitions.filter(tuition => tuition.paymentStatus !== 'paid')
 
   const handleStatusBadge = (status) => {
     switch (status.toLowerCase()) {
@@ -50,6 +52,7 @@ budget:tuition.budget,
   }
 
 const res = await axiosSecure.post('/payment-checkout-session', paymentInfo)
+
 window.location.assign(res.data.url)
 
 }
@@ -76,7 +79,7 @@ window.location.assign(res.data.url)
           </tr>
         </thead>
         <tbody>
-          {tuitions.map((tuition, index) => (
+          {paidTuitions.map((tuition, index) => (
             <tr key={tuition._id}>
               <th>{index + 1}</th>
               <td>{tuition.name}</td>
