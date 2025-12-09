@@ -1,5 +1,6 @@
 import React from 'react';
 import tutor from '../../assets/Tutor.png'
+import { Link } from 'react-router';
 
 const HeroSection = () => {
     return (
@@ -18,7 +19,7 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-4">
             <button className="btn btn-primary px-8">Find Tutor</button>
-            <button className="btn btn-outline px-8">Become a Tutor</button>
+            <Link to='/beATutor'><button className="btn btn-outline px-8">Become a Tutor</button></Link>
           </div>
         </div>
 
