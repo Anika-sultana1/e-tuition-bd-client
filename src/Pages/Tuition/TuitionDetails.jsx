@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { } from 'react';
 
 const TuitionDetails = ({tuition}) => {
 

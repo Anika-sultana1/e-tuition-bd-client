@@ -17,12 +17,19 @@ import PaymentCanceled from "../Pages/StudentDashboard/PaymentCanceled";
 import PaymentSuccess from "../Pages/StudentDashboard/PaymentSuccess";
 import UpdateTuitions from "../Pages/StudentDashboard/UpdateTuitions";
 import BeATutor from "../Pages/BeATutor/BeATutor";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import PrivateRoutes from "./PrivateRoutes";
+import TutorRoutes from "./TutorRoutes";
+import MyApplications from "../Pages/TutorDashboard/MyApplications";
+import OngoingTuitions from "../Pages/TutorDashboard/OngoingTuitions";
+import RevenueHistory from "../Pages/TutorDashboard/RevenueHistory";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
         {
             index:true,
@@ -53,44 +60,57 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard',
     Component:DashboardLayout,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       {
         index:true,
-        Component:Dashboard,
+        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
       },
       {
         path:'myTuitions',
-        Component: MyTuitions,
+        element:<PrivateRoutes><MyTuitions></MyTuitions></PrivateRoutes>
       },
       {
         path: 'postTuition',
-        Component:PostTuition,
+       element:<PrivateRoutes><PostTuition></PostTuition></PrivateRoutes>
       },
       {
         path: 'updateTuition/:id',
-        Component: UpdateTuitions,
+       element:<PrivateRoutes><UpdateTuitions></UpdateTuitions></PrivateRoutes>,
       },
       {
         path:'appliedTutors',
-        Component: AppliedTutors,
+        element:<PrivateRoutes><AppliedTutors></AppliedTutors></PrivateRoutes>
 
       },
       {
         path:'payment-success',
-        Component: PaymentSuccess,
+        element:<PrivateRoutes><PaymentSuccess></PaymentSuccess></PrivateRoutes>
       },
       {
         path:'payment-cancelled',
-        Component: PaymentCanceled,
+        element:<PrivateRoutes><PaymentCanceled></PaymentCanceled></PrivateRoutes>
       },
       {
         path:'payments',
-        Component: Payments,
+        element:<PrivateRoutes><Payments></Payments></PrivateRoutes>
       }
       ,
       {
         path:'profile-settings',
-        Component: ProfileSettings,
+        element:<PrivateRoutes><ProfileSettings></ProfileSettings></PrivateRoutes>
+      },
+      {
+        path:'my-applications',
+        element:<TutorRoutes><MyApplications></MyApplications></TutorRoutes>
+      },
+      {
+        path:'ongoing-tuitions',
+        element:<TutorRoutes><OngoingTuitions></OngoingTuitions></TutorRoutes>
+      },
+      {
+        path:'revenue-history',
+        element:<TutorRoutes><RevenueHistory></RevenueHistory></TutorRoutes>
       }
     ]
   }

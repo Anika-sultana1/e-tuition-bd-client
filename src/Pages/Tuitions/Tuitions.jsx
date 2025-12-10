@@ -8,6 +8,7 @@ import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 const Tuitions = () => {
   const axios = useAxios();
@@ -18,6 +19,7 @@ const Tuitions = () => {
   const [page, setPage] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [selectedTuition, setSelectedTuition] = useState(null);
+const navigate = useNavigate();
 
   const { data = {}, refetch } = useQuery({
     queryKey: ['tuitions', page],
@@ -46,6 +48,15 @@ const Tuitions = () => {
       email: user?.email,
       profilePhoto: user?.photoURL,
       tuitionPostId: selectedTuition?._id,
+      tuitionPostName:selectedTuition?.name,
+      tuitionPostClass:selectedTuition?.class,
+      tuitionPostBudget:selectedTuition?.budget,
+      tutionPostLocation:selectedTuition?.location,
+      tuitionPostTime:selectedTuition?.time,
+      tuitionPostDays:selectedTuition?.days,
+      tuitionPostSubject:selectedTuition?.subject,
+      tuitionPostPaymentStatus:selectedTuition?.paymentStatus,
+
       status: "pending",
       date: new Date(),
     };
@@ -71,11 +82,33 @@ const Tuitions = () => {
       .catch(err => {
         Swal.fire({
           icon: 'error',
-          title: 'Something went wrong!',
+          title: 'This Tuition You Already Applied',
           text: err?.response?.data?.message || err.message,
         });
       });
   };
+
+const handleApplyButton = (tuition)=>{
+if (!user?.email) {
+  return Swal.fire({
+    icon: "warning",
+    title: "Please Login First!",
+    text: "You need to login to apply for this tuition.",
+    confirmButtonText: "OK",
+  }).then(() => {
+    navigate("/login");
+  });
+}
+             setSelectedTuition(tuition);
+                  reset({
+                    name: user?.displayName || "",
+                    qualifications: "",
+                    experience: "",
+                    expectedSalary: "",
+                  });
+                  setOpenModal(true);
+}
+
 
   return (
     <div className='px-12'>
@@ -116,16 +149,8 @@ const Tuitions = () => {
               </p>
 
               <button
-                onClick={() => {
-                  setSelectedTuition(tuition);
-                  reset({
-                    name: user?.displayName || "",
-                    qualifications: "",
-                    experience: "",
-                    expectedSalary: "",
-                  });
-                  setOpenModal(true);
-                }}
+                onClick={() => handleApplyButton(tuition)
+                }
                 className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors"
               >
                 Apply

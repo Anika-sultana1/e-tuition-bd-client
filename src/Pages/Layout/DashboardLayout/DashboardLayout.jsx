@@ -4,10 +4,22 @@ import { IoHomeSharp } from 'react-icons/io5';
 import { PiChalkboardTeacherBold } from 'react-icons/pi';
 import { Link, Outlet } from 'react-router';
 import { IoIosSettings } from "react-icons/io";
-import { MdOutlinePayments } from "react-icons/md";
+import { MdOutgoingMail, MdOutlinePayments } from "react-icons/md";
+import { VscGitStashApply } from "react-icons/vsc";
+import { RiFolderHistoryLine } from "react-icons/ri";
 import Logo from '../../../Components/Logo/Logo';
+import useRole from '../../../Hooks/useRole';
+import Loading from '../../../Components/Loading/Loading';
 
 const DashboardLayout = () => {
+
+const { role, roleLoading } = useRole();
+
+if (roleLoading) {
+    return <Loading></Loading>
+}
+
+
     return (
         <div className="drawer lg:drawer-open">
           
@@ -46,8 +58,8 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">Homepage</span>
                             </Link>
                         </li>
-
-                        {/* My Tuitions */}
+{role === 'student' && (
+    <>                     {/* My Tuitions */}
                         <li>
                             <Link to="/dashboard/myTuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Tuitions">
                                 <FaUserGraduate />
@@ -77,7 +89,31 @@ const DashboardLayout = () => {
                                 <MdOutlinePayments />
                                 <span className="is-drawer-close:hidden">Payments</span>
                             </Link>
+                        </li></>
+)}
+   {role === 'tutor' && (
+    <>
+     <li>
+                            <Link to="/dashboard/my-applications" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
+                                <VscGitStashApply />
+                                <span className="is-drawer-close:hidden">My Applications</span>
+                            </Link>
                         </li>
+     <li>
+                            <Link to="/dashboard/ongoing-tuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="On Going Tuitions">
+                                <MdOutgoingMail />
+                                <span className="is-drawer-close:hidden">On Going Tuitions</span>
+                            </Link>
+                        </li>
+     <li>
+                            <Link to="/dashboard/revenue-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Revenue History">
+                                <RiFolderHistoryLine />
+                                <span className="is-drawer-close:hidden">Revenue History</span>
+                            </Link>
+                        </li>
+    
+    </>
+   )}
 
                         {/* Settings */}
                         <li>
