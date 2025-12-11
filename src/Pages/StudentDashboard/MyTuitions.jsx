@@ -20,30 +20,36 @@ const MyTuitions = () => {
 
 const paidTuitions = tuitions.filter(tuition => tuition.paymentStatus !== 'paid')
 
-  const handleStatusBadge = (status) => {
-    switch (status.toLowerCase()) {
-      case 'approved':
-        return (
-          <span className="badge badge-success flex items-center gap-1">
-            <FaCheck /> {status}
-          </span>
-        );
-      case 'pending':
-        return (
-          <span className="badge badge-warning flex items-center gap-1">
-            <FaHourglassHalf /> {status}
-          </span>
-        );
-      case 'rejected':
-        return (
-          <span className="badge badge-error flex items-center gap-1">
-            <FaTimes /> {status}
-          </span>
-        );
-      default:
-        return <span className="badge">{status}</span>;
-    }
-  };
+const handleStatusBadge = (status) => {
+  const s = status.toLowerCase();
+
+  if (s === 'approved') {
+    return (
+      <span className="badge badge-success flex items-center gap-1">
+        <FaCheck /> {status}
+      </span>
+    );
+  }
+
+  if (s === 'pending') {
+    return (
+      <span className="badge badge-warning flex items-center gap-1">
+        <FaHourglassHalf /> {status}
+      </span>
+    );
+  }
+
+  if (s === 'rejected') {
+    return (
+      <span className="badge badge-error flex items-center gap-1">
+        <FaTimes /> {status}
+      </span>
+    );
+  }
+
+  return <span className="badge">{status}</span>;
+};
+
 
 
 const handleRemoveTuition = (id)=>{
@@ -55,7 +61,8 @@ const handleRemoveTuition = (id)=>{
   confirmButtonColor: "#3085d6",
   cancelButtonColor: "#d33",
   confirmButtonText: "Yes, delete it!"
-}).then((result) => {
+})
+.then((result) => {
 
   axiosSecure.delete(`/tuitions/${id}`)
   .then(res=> {
