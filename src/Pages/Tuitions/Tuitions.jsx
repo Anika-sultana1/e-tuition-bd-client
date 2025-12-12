@@ -4,22 +4,27 @@ import { motion } from "framer-motion";
 import useAxios from '../../Hooks/useAxios';
 import { IoLocation } from 'react-icons/io5';
 import { FaRegClock } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 
 const Tuitions = () => {
   const axios = useAxios();
 
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const subject = searchParams.get("subject") || "";
+  const location = searchParams.get("location") || "";
+  const pageFromURL = Number(searchParams.get("page")) || 1;
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(pageFromURL);
 
-
-
-  const { data = {}, } = useQuery({
-    queryKey: ['tuitions', page],
+ 
+  const { data = {} } = useQuery({
+    queryKey: ['tuitions', page, subject, location],
     queryFn: async () => {
-      const res = await axios.get(`/tuitions?page=${page}`);
+      const res = await axios.get(
+        `/tuitions?page=${page}&subject=${subject}&location=${location}`
+      );
       return res.data;
     }
   });
@@ -27,9 +32,17 @@ const Tuitions = () => {
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
 
-
-
-
+ 
+  const updateSearch = (key, value) => {
+    const newParams = {
+      subject,
+      location,
+      page: 1
+    };
+    newParams[key] = value;
+    setSearchParams(newParams);
+    setPage(1);
+  };
 
   return (
     <div className='px-12'>
@@ -37,7 +50,26 @@ const Tuitions = () => {
         Explore Available Tuitions
       </h2>
 
-      
+      {/* Search Inputs */}
+      <div className="flex flex-col md:flex-row gap-4 mb-10 justify-center">
+        <input
+          type="text"
+          placeholder="Search by subject..."
+          value={subject}
+          onChange={(e) => updateSearch("subject", e.target.value)}
+          className="border border-gray-300 rounded-lg px-4 py-2"
+        />
+
+        <input
+          type="text"
+          placeholder="Search by location..."
+          value={location}
+          onChange={(e) => updateSearch("location", e.target.value)}
+          className="border border-gray-300 rounded-lg px-4 py-2"
+        />
+      </div>
+
+      {/* Tuition Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
         {tuitions.map((tuition, index) => (
           <motion.div
@@ -69,24 +101,24 @@ const Tuitions = () => {
                 Posted on: {new Date(tuition.date).toLocaleDateString()}
               </p>
 
-            <Link to={`/viewTuitionDetails/${tuition._id}`}>  <button
-              
-                className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors"
-              >
-                View Details
-              </button></Link>
+              <Link to={`/viewTuitionDetails/${tuition._id}`}>
+                <button className="w-full py-2 rounded-xl bg-blue-400 text-white text-sm font-semibold hover:bg-blue-500 transition-colors">
+                  View Details
+                </button>
+              </Link>
             </div>
           </motion.div>
         ))}
       </div>
 
-
- 
-
       {/* Pagination */}
       <div className="flex justify-center items-center gap-6 my-10">
         <button
-          onClick={() => page > 1 && setPage(page - 1)}
+          onClick={() => {
+            const newPage = page - 1;
+            setPage(newPage);
+            setSearchParams({ subject, location, page: newPage });
+          }}
           disabled={page === 1}
           className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-40"
         >
@@ -96,7 +128,11 @@ const Tuitions = () => {
         <p className="font-semibold">Page {page} / {totalPages}</p>
 
         <button
-          onClick={() => page < totalPages && setPage(page + 1)}
+          onClick={() => {
+            const newPage = page + 1;
+            setPage(newPage);
+            setSearchParams({ subject, location, page: newPage });
+          }}
           disabled={page === totalPages}
           className="px-4 py-2 bg-purple-500 text-white rounded-lg disabled:opacity-40"
         >

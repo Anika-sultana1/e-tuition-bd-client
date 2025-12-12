@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Reviw from "./Reviw";
+
 
 const TuitionManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,6 +20,14 @@ const TuitionManagement = () => {
 
   const tuitions = data.tuitions || [];
   const totalPages = data.totalPages || 1;
+
+  const handleChecklistSubmit = async (id, checks) => {
+    const res = await axiosSecure.post(`/tuition/review/${id}`, checks);
+    if (res.data.success) {
+      Swal.fire("Review Saved!", "Checklist review added.", "success");
+      refetch();
+    }
+  };
 
   const handleAction = async (id, action) => {
     const confirmResult = await Swal.fire({
@@ -74,6 +84,13 @@ const TuitionManagement = () => {
             <p className="text-gray-600 mb-3">
               <span className="font-medium">Days:</span> {t.days}
             </p>
+
+            <Reviw
+              tuitionId={t._id}
+              onSubmit={handleChecklistSubmit}
+             >
+              
+            </Reviw>
 
             <div className="flex gap-3 mt-4">
               <button
