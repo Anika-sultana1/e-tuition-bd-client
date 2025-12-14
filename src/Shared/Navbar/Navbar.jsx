@@ -1,21 +1,73 @@
 import React from 'react';
 import Logo from '../../Components/Logo/Logo';
-import { Link, useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth'
 import Swal from 'sweetalert2';
+import { FaRegMoon, FaSun, FaUserCircle } from 'react-icons/fa';
 const Navbar = () => {
 
   const { user,signOutUser } = useAuth();
 
-  const links = <>
-    <Link to='/' className='m-2'><a>Home</a></Link>
-    <Link to='/tuitions' className='m-2'><a>Tuitions</a></Link>
-    <Link to='/tutors' className='m-2'><a>Tutors</a></Link>
-    <Link className='m-2'><a> About </a></Link>
-    <Link className='m-2'><a>Contact </a></Link>
-    <Link to='/dashboard' className='m-2'><a>Dashboard </a></Link>
 
+
+const links = (
+  <>
+    <NavLink
+      to="/"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      Home
+    </NavLink>
+
+    <NavLink
+      to="/tuitions"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      Tuitions
+    </NavLink>
+
+    <NavLink
+      to="/tutors"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      Tutors
+    </NavLink>
+
+    <NavLink
+      to="/about"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      About
+    </NavLink>
+
+    <NavLink
+      to="/contact"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      Contact
+    </NavLink>
+
+    <NavLink
+      to="/dashboard"
+      className={({ isActive }) =>
+        `m-2 ${isActive ? "border-b-2 border-blue-500 font-semibold" : ""}`
+      }
+    >
+      Dashboard
+    </NavLink>
   </>
+);
+
 const navigate = useNavigate();
 
 const handleSignOut = ()=>{
@@ -51,19 +103,41 @@ const handleSignOut = ()=>{
         </ul>
       </div>
       <div className="navbar-end">
+        <label className="swap swap-rotate">
+          <input type="checkbox" className="theme-controller " value="dark" />
+          <span className="swap-off m-2"><FaSun /></span>
+          <span className="swap-on m-2"><FaRegMoon /></span>
+        </label>
 
-        {
-          user ? <button
-            className=" px-6 py-2 bg-blue-400 hover:bg-blue-500 text-white rounded-full font-semibold transition-colors"
-          onClick={handleSignOut}
-          >
-            Sign Out
-          </button> : <button
-            className=" px-6 py-2 bg-blue-400 hover:bg-blue-500 text-white rounded-full font-semibold transition-colors"
-          >
-            <Link to='/login'>Login</Link>/ <Link to='/register'>Register</Link>
-          </button>
-        }
+       {
+  user ? (
+    <div className="flex items-center gap-2">
+   
+      <div className="avatar">
+        <div className="w-8 rounded-full ">
+          <img
+            src={user.photoURL || <FaUserCircle />}
+            alt={user.displayName || "User"}
+          />
+        </div>
+      </div>
+
+
+      <button
+        onClick={handleSignOut}
+        className="btn btn-primary btn-sm rounded-full"
+      >
+        Sign Out
+      </button>
+    </div>
+  ) : (
+    <button className="btn btn-outline btn-primary btn-sm rounded-full">
+      <NavLink to="/login">Login</NavLink> /
+      <NavLink to="/register">Register</NavLink>
+    </button>
+  )
+}
+
 
       </div>
     </div>

@@ -29,11 +29,10 @@ const AdminDashboard = () => {
   ];
 
   useEffect(() => {
-    const fetchStats = async () => {
-  
-  
-        axiosSecure.get("/admin/dashboard-stats")
+   
+  axiosSecure.get("/admin/dashboard-stats")
         .then(res=> {
+          console.log('res er data', res.data)
 setStats(res.data);
         })
         
@@ -51,8 +50,8 @@ setStats(res.data);
      
 })
 
-    };
-    fetchStats();
+  
+
   }, [axiosSecure]);
 
   const formatCurrency = (num) => `$${num.toLocaleString()}`;

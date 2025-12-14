@@ -46,7 +46,7 @@ const Tuitions = () => {
 
   return (
     <div className='px-12'>
-      <h2 className="text-3xl md:text-4xl font-bold text-center my-12 text-gray-800">
+      <h2 className="text-3xl md:text-4xl font-bold text-center my-12 text-gray-500">
         Explore Available Tuitions
       </h2>
 

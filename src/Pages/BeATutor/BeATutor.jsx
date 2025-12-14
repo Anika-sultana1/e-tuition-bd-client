@@ -1,17 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
-// import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 const BeATutor = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-//   const axiosSecure = useAxiosSecure();
+
     const {user} = useAuth();
     const handleTutorSubmission = (data) => {
-    
+    toast.info('This page is read only and Outside the requirement')
 
   console.log('data is', data)
 
@@ -19,6 +19,7 @@ const BeATutor = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+<ToastContainer></ToastContainer>
             <div className="max-w-xl w-full bg-white p-6 md:p-10 rounded-lg shadow-xl">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-indigo-500">
                     Tutor Application Review
