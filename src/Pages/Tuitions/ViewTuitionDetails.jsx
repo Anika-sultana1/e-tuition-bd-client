@@ -54,13 +54,15 @@ const TuitionDetailsPage = () => {
       profilePhoto: user?.photoURL,
       trackingId:tuition.trackingId,
       tuitionPostId: tuition?._id,
+      tuitionPostName:tuition?.name,
       tuitionPostSubject: tuition?.subject,
       tuitionPostClass: tuition?.class,
       tuitionPostBudget: tuition?.budget,
       tuitionPostLocation: tuition?.location,
       tuitionPostDays: tuition?.days,
+  
       tuitionPostTime: tuition?.timing,
-
+    tuitionPostClassStatus: tuition?.classStatus,
       status: "pending",
       date: new Date(),
     };

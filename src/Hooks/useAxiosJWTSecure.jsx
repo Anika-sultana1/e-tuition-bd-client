@@ -4,7 +4,7 @@
 
 // const useJwtSecure = () => {
 //   const instance = axios.create({
-//     baseURL: 'https://e-tuition-bd-server.vercel.app', 
+//     baseURL: '', 
 //     headers: {
 //       authorization: `Bearer ${localStorage.getItem('token')}`,
 //     },

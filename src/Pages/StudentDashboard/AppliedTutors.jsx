@@ -117,6 +117,32 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
  });
  }
 
+const handleMarkCompleted = async (id) => {
+   
+    axiosSecure.patch(`/tuitions/complete/${id}`)
+    .then(res=> {
+      if (res.data.modifiedCount) {
+        Swal.fire({
+          title: "Success",
+          text: "Class marked as completed!",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        refetch();
+      }
+    })
+
+    .catch ((err)=> {
+      console.error(err);
+      Swal.fire({
+        title: "Error",
+        text: err.response?.data?.message || "Something went wrong",
+        icon: "error"
+      });
+    })
+  };
+
     return (
         <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
           <title>eTuitionBd-Dashboard-AppliedTutors</title>
@@ -126,10 +152,11 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <tr>Profile Picture</tr>
+                        <td>Profile Picture</td>
                         <th>Qualifications</th>
                         <th>Experiences</th>
                         <th>Status</th>
+                        <th>Class Status</th>
                         <th>Salary</th>
                         <th>Applied At</th>
                         <th>Actions</th>
@@ -146,15 +173,35 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
                             <td>{appliedTutor.qualifications}</td>
                             <td>{appliedTutor.experience}</td>
                             <td>{handleStatusBadge(appliedTutor.status)}</td>
+              <td>
+  {appliedTutor.tuitionPostClassStatus === 'not_started' && (
+    <span className="badge badge-info flex items-center gap-1">Not Started</span>
+  )}
+  {appliedTutor.tuitionPostClassStatus === 'on_going' && (
+    <span className="badge badge-error flex items-center gap-1">On Going</span>
+  )}
+  {appliedTutor.tuitionPostClassStatus === 'completed' && (
+    <span className="badge badge-success flex items-center gap-1">Completed</span>
+  )}
+</td>
+
                             <td>{appliedTutor.expectedSalary}</td>
                             <td>{new Date(appliedTutor.date).toLocaleDateString()}</td>
                           <td>
   <div className="grid grid-cols-1 gap-2 min-w-[120px]">
+    {
+      appliedTutor.status==='pending' ? '' : <button
+                    onClick={() => handleMarkCompleted(appliedTutor.tuitionPostId)}
+                    className="btn btn-xs bg-green-500 hover:bg-green-600 text-white mt-1"
+                  >
+                    Mark as Completed
+                  </button>
+    }
 
     <button
       onClick={() => handleApproveAppliedTutor(appliedTutor)}
       className="btn btn-xs bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-1"
-      disabled={appliedTutor.status !== 'approved'}
+      // disabled={appliedTutor.status !== 'approved'}
     >
       <FaEdit /> Approve
     </button>
