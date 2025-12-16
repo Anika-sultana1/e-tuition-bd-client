@@ -20,7 +20,7 @@ const AllTutors = () => {
 
   return (
     <div className="py-10 px-4">
-
+<title>eTuitionBd-Tutors</title>
       <h2 className="text-3xl font-bold text-center mb-10 text-gray-500">
         Meet Our Tutors
       </h2>
@@ -35,7 +35,7 @@ const AllTutors = () => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="mb-4">
-              <div className="w-28 h-28 rounded-full p-1 bg-gradient-to-r from-purple-400 to-indigo-400 shadow-md">
+              <div className="w-28 h-28 rounded-full p-1 bg-linear-to-r from-purple-400 to-indigo-400 shadow-md">
                 <img
                   src={tutor.profilePhoto || tutor.photo}
                   alt={tutor.name}

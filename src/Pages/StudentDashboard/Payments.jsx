@@ -1,6 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Components/Loading/Loading';
 
 const Payments = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,10 +14,11 @@ const Payments = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center mt-4">Loading payments...</p>;
+  if (isLoading) return <Loading></Loading>;
 
   return (
     <div className="overflow-x-auto p-6 bg-base-200 rounded-2xl shadow-lg">
+      <title>eTuitionBd-Dashboard-Payments</title>
       <h2 className="text-3xl font-bold mb-6 text-center">My Payments</h2>
       <table className="table table-zebra w-full">
         <thead className="bg-gray-100">

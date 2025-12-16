@@ -31,10 +31,10 @@ const UserDashboard = () => {
   if (error) return <ErrorPage />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50 p-6">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-indigo-50 p-6">
       <div className="max-w-5xl mx-auto space-y-8">
 
-        {/* 🌟 Header Card */}
+     
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ const UserDashboard = () => {
           </div>
         </motion.div>
 
-        {/* 📜 Activities */}
+ 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ const UserDashboard = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="flex justify-between items-center bg-gradient-to-r from-white to-indigo-50 border border-indigo-100 rounded-xl px-5 py-4 hover:shadow-md transition"
+                  className="flex justify-between items-center bg-linear-to-r from-white to-indigo-50 border border-indigo-100 rounded-xl px-5 py-4 hover:shadow-md transition"
                 >
                   <div>
                     <p className="font-medium text-gray-800 capitalize">

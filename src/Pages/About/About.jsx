@@ -10,6 +10,7 @@ import {
 const About = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <title>eTuitionBD-About</title>
       <div className="max-w-7xl mx-auto px-4 py-24 space-y-28">
 
         <motion.div
@@ -21,7 +22,7 @@ const About = () => {
           <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-2">
             Our Story
           </p>
-          <h1 className="text-6xl font-black mb-6 bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-6xl font-black mb-6 bg-linear-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent leading-tight">
             Connecting Education, Digitally.
           </h1>
           <p className="text-gray-600 max-w-4xl mx-auto text-xl leading-relaxed font-light">
@@ -161,7 +162,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center bg-gradient-to-br from-blue-600 to-teal-500 rounded-3xl p-16 shadow-2xl"
+          className="text-center bg-linear-to-br from-blue-600 to-teal-500 rounded-3xl p-16 shadow-2xl"
         >
           <h2 className="text-4xl font-black mb-6 text-white">
             Our Vision

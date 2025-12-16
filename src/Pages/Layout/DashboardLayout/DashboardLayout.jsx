@@ -13,16 +13,16 @@ import Loading from '../../../Components/Loading/Loading';
 
 const DashboardLayout = () => {
 
-const { role, roleLoading } = useRole();
+    const { role, roleLoading } = useRole();
 
-if (roleLoading) {
-    return <Loading></Loading>
-}
+    if (roleLoading) {
+        return <Loading></Loading>
+    }
 
 
     return (
         <div className="drawer lg:drawer-open">
-          
+<title>eTuitionBd-Dashboard-Home</title>
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
             <div className="drawer-content">
@@ -36,7 +36,7 @@ if (roleLoading) {
                         </svg>
                     </label>
                     <Link to='/'><div className="px-4">
-                      <Logo></Logo>
+                        <Logo></Logo>
                     </div></Link>
                 </nav>
 
@@ -58,79 +58,79 @@ if (roleLoading) {
                                 <span className="is-drawer-close:hidden">Homepage</span>
                             </Link>
                         </li>
-{role === 'student' && (
-    <>                     {/* My Tuitions */}
-                        <li>
-                            <Link to="/dashboard/myTuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Tuitions">
-                                <FaUserGraduate />
-                                <span className="is-drawer-close:hidden">My Tuitions</span>
-                            </Link>
-                        </li>
+                        {role === 'student' && (
+                            <>                     {/* My Tuitions */}
+                                <li>
+                                    <Link to="/dashboard/myTuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Tuitions">
+                                        <FaUserGraduate />
+                                        <span className="is-drawer-close:hidden">My Tuitions</span>
+                                    </Link>
+                                </li>
 
-                        {/* Post Tuition */}
-                        <li>
-                            <Link to="/dashboard/postTuition" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Post a Tuition">
-                                <PiChalkboardTeacherBold />
-                                <span className="is-drawer-close:hidden">Post a Tuition</span>
-                            </Link>
-                        </li>
+                                {/* Post Tuition */}
+                                <li>
+                                    <Link to="/dashboard/postTuition" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Post a Tuition">
+                                        <PiChalkboardTeacherBold />
+                                        <span className="is-drawer-close:hidden">Post a Tuition</span>
+                                    </Link>
+                                </li>
 
-                        {/* Applied Tutors */}
-                        <li>
-                            <Link to="/dashboard/appliedTutors" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Applied Tutors">
-                                <FaChalkboard />
-                                <span className="is-drawer-close:hidden">Applied Tutors</span>
-                            </Link>
-                        </li>
+                                {/* Applied Tutors */}
+                                <li>
+                                    <Link to="/dashboard/appliedTutors" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Applied Tutors">
+                                        <FaChalkboard />
+                                        <span className="is-drawer-close:hidden">Applied Tutors</span>
+                                    </Link>
+                                </li>
 
-                        {/* Payments */}
-                        <li>
-                            <Link to="/dashboard/payments" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payments">
-                                <MdOutlinePayments />
-                                <span className="is-drawer-close:hidden">Payments</span>
-                            </Link>
-                        </li></>
-)}
-   {role === 'tutor' && (
-    <>
-     <li>
-                            <Link to="/dashboard/my-applications" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
-                                <VscGitStashApply />
-                                <span className="is-drawer-close:hidden">My Applications</span>
-                            </Link>
-                        </li>
-     <li>
-                            <Link to="/dashboard/ongoing-tuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="On Going Tuitions">
-                                <MdOutgoingMail />
-                                <span className="is-drawer-close:hidden">On Going Tuitions</span>
-                            </Link>
-                        </li>
-     <li>
-                            <Link to="/dashboard/revenue-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Revenue History">
-                                <RiFolderHistoryLine />
-                                <span className="is-drawer-close:hidden">Revenue History</span>
-                            </Link>
-                        </li>
-    
-    </>
-   )}
-{role === 'admin' && (
-      <li>
-                            <Link to="/dashboard/user-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="User Management">
-                                <MdManageAccounts />
-                                <span className="is-drawer-close:hidden">User Management</span>
-                            </Link>
-                            <Link to="/dashboard/tuition-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Tuition Management">
-                                <MdOutlineManageHistory/>
-                                <span className="is-drawer-close:hidden">Tuition Management</span>
-                            </Link>
-                            
-                            <Link to="/dashboard/report-analytics" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Reports & Analytics">
-                               <IoMdAnalytics />
-                                <span className="is-drawer-close:hidden">Reports & Analytics</span>
-                            </Link>
-                        </li>
-)}
+                                {/* Payments */}
+                                <li>
+                                    <Link to="/dashboard/payments" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payments">
+                                        <MdOutlinePayments />
+                                        <span className="is-drawer-close:hidden">Payments</span>
+                                    </Link>
+                                </li></>
+                        )}
+                        {role === 'tutor' && (
+                            <>
+                                <li>
+                                    <Link to="/dashboard/my-applications" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Applications">
+                                        <VscGitStashApply />
+                                        <span className="is-drawer-close:hidden">My Applications</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/ongoing-tuitions" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="On Going Tuitions">
+                                        <MdOutgoingMail />
+                                        <span className="is-drawer-close:hidden">On Going Tuitions</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/revenue-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Revenue History">
+                                        <RiFolderHistoryLine />
+                                        <span className="is-drawer-close:hidden">Revenue History</span>
+                                    </Link>
+                                </li>
+
+                            </>
+                        )}
+                        {role === 'admin' && (
+                            <li>
+                                <Link to="/dashboard/user-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="User Management">
+                                    <MdManageAccounts />
+                                    <span className="is-drawer-close:hidden">User Management</span>
+                                </Link>
+                                <Link to="/dashboard/tuition-management" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Tuition Management">
+                                    <MdOutlineManageHistory />
+                                    <span className="is-drawer-close:hidden">Tuition Management</span>
+                                </Link>
+
+                                <Link to="/dashboard/report-analytics" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Reports & Analytics">
+                                    <IoMdAnalytics />
+                                    <span className="is-drawer-close:hidden">Reports & Analytics</span>
+                                </Link>
+                            </li>
+                        )}
                         {/* Settings */}
                         <li>
                             <Link to="/dashboard/profile-settings" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { FaDollarSign, FaCalendarAlt, FaUser } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Loading from "../../Components/Loading/Loading";
@@ -22,6 +21,7 @@ const RevenueHistory = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+      <title>eTuitionBd-Dashboard-RevenueHistory</title>
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Revenue History</h2>
       <div className="bg-white shadow-md rounded-lg p-4 mb-6 flex items-center space-x-4">
         <FaDollarSign className="text-green-500 text-3xl" />

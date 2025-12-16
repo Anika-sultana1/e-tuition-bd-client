@@ -43,6 +43,7 @@ navigate('/dashboard/myTuitions')
 
     return (
         <div className="max-w-2xl mx-auto p-10 bg-linear-to-r from-indigo-100 to-purple-100 rounded-3xl shadow-xl mt-10 border border-gray-200">
+          <title>eTuitionBd-Dashboard-PostTuitions</title>
             <h2 className="text-4xl font-extrabold mb-8 text-center text-purple-700">Post a Tuition</h2>
             <p className='text-center'>Quickly post your tuition requirements and find the perfect tutor! Fill in the class, subjects, preferred days, timing, location, and expected salary. Our easy-to-use form ensures your tuition post reaches qualified tutors fast, helping you start learning without any hassle.</p>
 
@@ -94,7 +95,7 @@ navigate('/dashboard/myTuitions')
                         placeholder="Math, English..."
                         className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
-                    {errors && <p className='text-red'>Subject is required</p>}
+                    {errors.subject && <p className='text-red'>Subject is required</p>}
                 </div>
 
                 {/* Location */}
@@ -158,7 +159,7 @@ navigate('/dashboard/myTuitions')
           
 
                 {/* Submit Button */}
-                <button className="btn btn-gradient btn-lg w-full text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg">
+                <button className="btn btn-gradient btn-lg w-full text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform duration-200 bg-linear-to-r from-purple-500 to-indigo-500 shadow-lg">
                     Post your Tuition
                 </button>
 

@@ -33,8 +33,8 @@ const UpdateTuitions = () => {
         setFormData(res.data);
       })
       .catch((err) => {
-        console.error(err);
-        toast.error('Failed to load tuitions');
+      
+        toast.error(`Failed to load tuitions${err}`);
       });
   }, [id]); 
 
@@ -62,9 +62,9 @@ const UpdateTuitions = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
+        
         setLoading(false);
-        toast.error('Tuition update failed');
+        toast.error(`Tuition update failed${err}`);
       });
   };
 
@@ -194,7 +194,7 @@ const UpdateTuitions = () => {
     
         <button
           type="submit"
-          className={`btn btn-gradient btn-lg w-full text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-purple-500 to-indigo-500 ${loading ? 'loading' : ''}`}
+          className={`btn btn-gradient btn-lg w-full text-white font-bold py-3 rounded-xl hover:scale-105 transition-transform duration-200 bg-linear-to-r from-purple-500 to-indigo-500 ${loading ? <Loading></Loading> : ''}`}
           disabled={loading}
         >
           {loading ? <Loading></Loading> : 'Update Tuition'}

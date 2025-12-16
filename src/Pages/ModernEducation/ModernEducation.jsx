@@ -114,7 +114,7 @@ const handleSubjectClick = (subjectName)=>{
   <button
     className="btn btn-primary px-6"
     onClick={() => {
-      // Set search params and navigate to Tuitions page
+      
       setSearchParams({ subject, location, page: 1 });
       navigate(`/tuitions?subject=${subject}&location=${location}&page=1`);
     }}

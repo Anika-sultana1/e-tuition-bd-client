@@ -3,12 +3,10 @@ import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-
-// ICONS
 import { FaBook, FaUserGraduate, FaMapMarkerAlt, FaMoneyBillWave, FaCalendarAlt, FaClock, FaPaperPlane, FaTimes } from "react-icons/fa";
+import Loading from "../../Components/Loading/Loading";
 
 const TuitionDetailsPage = () => {
   const { id } = useParams();
@@ -92,11 +90,7 @@ const TuitionDetailsPage = () => {
   };
 
   if (isLoading)
-    return (
-      <p className="text-center py-12 text-gray-400 text-lg animate-pulse">
-        Loading Tuition Details...
-      </p>
-    );
+    return <Loading></Loading>
 
   if (isError)
     return (
@@ -108,14 +102,13 @@ const TuitionDetailsPage = () => {
   return (
     <div className="max-w-3xl mx-auto mt-12">
 
-      {/* Outer Card */}
+  
       <div className="backdrop-blur-xl my-5 bg-white/40 border border-white/20 shadow-2xl bg-linear-to-br from-green-500 to-red-300 rounded-3xl p-8 animate-[fadeIn_0.4s_ease]">
         
         <h1 className="text-3xl font-bold text-center text-blue-700 mb-6 tracking-wide">
           Tuition Details
         </h1>
 
-        {/* Info Grid */}
         <div className="grid grid-cols-2 gap-5 text-gray-700 text-[16px] ">
 
           <div className="flex items-center gap-2">
@@ -135,7 +128,7 @@ const TuitionDetailsPage = () => {
 
           <div className="flex items-center gap-2">
             <FaMoneyBillWave className="text-yellow-600" />
-            <span><strong>Budget:</strong> {tuition.budget} ৳</span>
+            <span><strong>Budget:</strong> {tuition.budget}$</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -154,7 +147,7 @@ const TuitionDetailsPage = () => {
         <button
           onClick={handleApply}
           className="w-full mt-8 py-3 text-lg font-semibold text-white rounded-2xl
-          bg-gradient-to-r from-blue-500 to-blue-700 shadow-xl hover:from-blue-600 hover:to-blue-800
+          bg-linear-to-r from-blue-500 to-blue-700 shadow-xl hover:from-blue-600 hover:to-blue-800
           flex justify-center items-center gap-2 transition-all active:scale-95"
         >
           <FaPaperPlane /> Apply Now

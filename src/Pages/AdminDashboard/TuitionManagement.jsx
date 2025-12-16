@@ -55,6 +55,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
 
   return (
     <div className="p-6">
+      <title>eTuitionBd-Dashboard-TuitionManagement</title>
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Tuition Management</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -112,7 +113,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
         ))}
       </div>
 
-      {/* Pagination */}
+      {/* pagination */}
       <div className="flex justify-center items-center gap-6 my-10">
         <button
           onClick={() => page > 1 && setPage(page - 1)}

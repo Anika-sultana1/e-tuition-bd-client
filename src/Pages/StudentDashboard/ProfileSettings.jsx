@@ -32,47 +32,54 @@ const ProfileSettings = () => {
   const handleUpdate = async () => {
     const updatedData = {};
 
-    if (openField === "name") updatedData.displayName = formData.name;
-    if (openField === "phoneNumber") updatedData.phoneNumber = formData.phoneNumber;
-    if (openField === "photoURL") updatedData.photoURL = formData.photoURL;
+    if (openField === "name") {
+      updatedData.displayName = formData.name;
+    }
+    if (openField === "phoneNumber") {
+      updatedData.phoneNumber = formData.phoneNumber;
+    }
+    if (openField === "photoURL") {
+      updatedData.photoURL = formData.photoURL;
+    }
 
-    
-      
-     axiosSecure.patch(`/users/update/${user?.email}`, updatedData)
-      .then(res=> {
-  if (res.data.modifiedCount > 0) {
 
-       
-        if (openField === "name" || openField === "photoURL") {
-         updateUserProfile({
+
+    axiosSecure.patch(`/users/update/${user?.email}`, updatedData)
+      .then(res => {
+        if (res.data.modifiedCount > 0) {
+
+
+          if (openField === "name" || openField === "photoURL") {
+            updateUserProfile({
+              displayName: updatedData.displayName || user.displayName,
+              photoURL: updatedData.photoURL || user.photoURL
+            });
+          }
+
+
+          setUser({
+            ...user,
             displayName: updatedData.displayName || user.displayName,
+            phoneNumber: updatedData.phoneNumber || user.phoneNumber,
             photoURL: updatedData.photoURL || user.photoURL
           });
+
+          toast.success("Profile updated successfully!");
+        } else {
+          toast.info("No changes were made.");
         }
-
-     
-        setUser({
-          ...user,
-          displayName: updatedData.displayName || user.displayName,
-          phoneNumber: updatedData.phoneNumber || user.phoneNumber,
-          photoURL: updatedData.photoURL || user.photoURL
-        });
-
-        toast.success("Profile updated successfully!");
-      } else {
-        toast.info("No changes were made.");
-      }
       })
 
-    
 
-      setOpenField(null);
+
+    setOpenField(null);
 
 
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-linear-to-br from-green-500 to-red-300 rounded-3xl shadow-2xl border border-white/30">
+      <title>eTuitionBd-Dashboard-ProfileSettings</title>
       <ToastContainer />
 
       <div className="flex flex-col items-center gap-4">

@@ -13,7 +13,13 @@ const ReportAnalytics = () => {
   const [weeklyData, setWeeklyData] = useState([]);
 
   useEffect(() => {
-    axiosSecure.get("/admin/report-summary").then(res => setSummary(res.data)).catch(console.log);
+    axiosSecure.get("/admin/report-summary")
+    .then(res => {
+      setSummary(res.data)
+    })
+    .catch(err=>{
+       console.log(err)
+    });
   }, []);
 
   useEffect(() => {
@@ -21,26 +27,40 @@ const ReportAnalytics = () => {
       .then(res => {
         setTransactions(res.data.transactions);
         setTotalPages(res.data.totalPages);
-      }).catch(console.log);
+      })
+      .catch(err=>{
+        console.log(err)
+      });
   }, [page]);
 
   useEffect(() => {
     axiosSecure.get("/admin/monthly-revenue?months=12")
-      .then(res => setMonthlyData(res.data.map(item => ({ name: `${item._id.month}/${item._id.year}`, Revenue: item.total }))))
-      .catch(console.log);
+      .then(res =>{
+        setMonthlyData(res.data.map(item => ({ name: `${item._id.month}/${item._id.year}`, Revenue: item.total })))
+      }
+         )
+      .catch(err=> {
+        console.log(err)
+      });
   }, []);
 
   useEffect(() => {
     axiosSecure.get("/admin/weekly-revenue?week=4")
-      .then(res => setWeeklyData(res.data.map(item => ({ name: `${item._id.week}/${item._id.year}`, Revenue: item.total }))))
-      .catch(console.log);
+      .then(res =>{
+        setWeeklyData(res.data.map(item => ({ name: `${item._id.week}/${item._id.year}`, Revenue: item.total })))
+      }
+         )
+      .catch(err=> {
+        console.log(err)
+      });
   }, []);
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
+      <title>eTuitionBd-Dashboard-Report&Analytics</title>
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Reports & Analytics</h2>
 
-      {/* Summary Cards */}
+      {/* summary cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div className="p-4 bg-green-300 rounded shadow">
           <h3 className="text-lg font-medium">Total Earnings</h3>
@@ -52,7 +72,7 @@ const ReportAnalytics = () => {
         </div>
       </div>
 
-      {/* Transactions Table */}
+      {/* transactions table */}
       <div className="mb-8 bg-white shadow rounded p-4">
         <h3 className="text-lg font-semibold mb-3">Transactions</h3>
         <div className="overflow-x-auto">

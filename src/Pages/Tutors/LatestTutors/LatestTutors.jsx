@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import useAxios from '../../../Hooks/useAxios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
+import { FaStar } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Link } from 'react-router';
+
 
 
 const LatestTutors = () => {
@@ -21,9 +23,9 @@ const LatestTutors = () => {
   });
 
   return (
-    <section className="py-20 bg-gradient-to-b from-purple-50 via-indigo-50 to-white">
+    <section className="py-20 bg-linear-to-b from-purple-50 via-indigo-50 to-white">
       <div className="container mx-auto px-4">
-     <section className="relative h-[500px] bg-gradient-to-r from-purple-50 to-indigo-100 flex flex-col justify-center items-center px-6 text-center">
+     <section className="relative h-[500px] bg-linear-to-r from-purple-50 to-indigo-100 flex flex-col justify-center items-center px-6 text-center">
       
   
       <motion.h1
@@ -43,7 +45,7 @@ const LatestTutors = () => {
       >
         Connect with expert tutors anytime, anywhere, and elevate your skills with personalized guidance.
       </motion.p>
-
+<Link to='/dashboard/postTuition'>
       <motion.button
         className="mt-8 px-6 py-3 bg-blue-400 hover:bg-blue-500 text-white rounded-full font-semibold transition-colors"
         initial={{ opacity: 0, y: 20 }}
@@ -51,7 +53,7 @@ const LatestTutors = () => {
         transition={{ delay: 1.5, duration: 0.8 }}
       >
         Get Started
-      </motion.button>
+      </motion.button></Link>
     </section>
 
 
@@ -82,7 +84,7 @@ const LatestTutors = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <div className="flex justify-center mb-4">
-          <div className="rounded-full p-1 bg-gradient-to-r from-purple-400 to-indigo-400">
+          <div className="rounded-full p-1 bg-linear-to-r from-purple-400 to-indigo-400">
             <img
               src={tutor.profilePhoto || tutor.photo}
               alt={tutor.name}
@@ -98,7 +100,7 @@ const LatestTutors = () => {
           <p><span className="font-medium">Subjects:</span> {tutor.subjects.join(", ")}</p>
           <p><span className="font-medium">Experience:</span> {tutor.experience}</p>
           <p><span className="font-medium">Location:</span> {tutor.location}</p>
-          {tutor.rating && <p><span className="font-medium">Rating:</span> {tutor.rating} ⭐</p>}
+          {tutor.rating && <p><span className="font-medium">Rating:</span> {tutor.rating} <FaStar></FaStar></p>}
         </div>
 
         

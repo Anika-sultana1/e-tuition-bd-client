@@ -46,6 +46,7 @@ forgetPassword(email)
 
   return (
     <div className="min-h-screen flex items-center justify-center  px-4 py-4">
+      <title>eTuitionBd-Login</title>
 <ToastContainer></ToastContainer>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-6xl bg-linear-to-br from-green-500 to-red-300 shadow-2xl rounded-3xl overflow-hidden">
 

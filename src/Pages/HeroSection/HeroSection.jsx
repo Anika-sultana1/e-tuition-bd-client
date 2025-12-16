@@ -19,7 +19,7 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-4">
             <Link to='/tuitions'><button className="btn btn-primary px-8">Find Tutions</button></Link>
-            <Link to='/beATutor'><button className="btn btn-outline px-8">Become a Tutor</button></Link>
+          
           </div>
         </div>
 

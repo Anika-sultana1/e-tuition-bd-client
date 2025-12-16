@@ -64,7 +64,7 @@ const TutorDashboard = () => {
           <FaChalkboardTeacher className="mr-3" />
           Tutor Dashboard Overview
         </h1>
-        <p className="text-gray-500 mt-1">Welcome back, **{user?.displayName || 'Tutor'}**! Here's a summary of your activities.</p>
+        <p className="text-gray-500 mt-1">Welcome back, {user?.displayName || 'Tutor'}! Here's a summary of your activities.</p>
       </div>
 
       {/* Stats Cards Grid */}

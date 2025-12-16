@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Loading from '../../Components/Loading/Loading';
 
 const OngoingTuitions = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,10 +14,13 @@ const OngoingTuitions = () => {
     }
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return <Loading></Loading>
+  };
 
   return (
     <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+      <title>eTuitionBd-Dashboard-OnGoningTuitions</title>
       <h2 className="text-2xl font-bold mb-4 text-center">Ongoing Tuitions</h2>
       <table className="table table-zebra w-full">
         <thead>

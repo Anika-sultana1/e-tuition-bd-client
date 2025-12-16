@@ -18,6 +18,7 @@ toast.success('Your message was sent successfully! You will receive a reply shor
 
   return (
     <div className="bg-gray-50 py-20">
+      <title>eTuitionBd-Contact</title>
       <div className="max-w-6xl mx-auto px-4">
         <ToastContainer></ToastContainer>
    

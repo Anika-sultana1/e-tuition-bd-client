@@ -110,7 +110,7 @@ const handleUpdateApplication = async (e) => {
 
   return (
     <div>
-      
+      <title>eTuitionBd-Dashboard-MyApplications</title>
       <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-center">My Applications</h2>
         <table className="table table-zebra w-full">

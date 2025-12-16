@@ -92,6 +92,7 @@ const handleRemoveTuition = (id)=>{
 
   return (
     <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+      <title>eTuitionBd-Dashboard-MyTuitions</title>
       <h2 className="text-2xl font-bold mb-4 text-center">My Tuitions:{allTuitions.length}</h2>
       <table className="table table-zebra w-full">
         <thead>

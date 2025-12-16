@@ -10,9 +10,7 @@ const ReviewChecklist = ({ tuitionId, onSubmit }) => {
   });
 
   const handleChange = (field) => {
-    setChecks((prev) => ({
-      ...prev,
-      [field]: !prev[field],
+    setChecks((prev) => ({...prev,[field]: !prev[field],
     }));
   };
 

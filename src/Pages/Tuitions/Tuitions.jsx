@@ -56,6 +56,7 @@ const updateSort = (value) => {
 
   return (
     <div className='px-12'>
+      <title>eTuitionBd-Tuitions</title>
       <h2 className="text-3xl md:text-4xl font-bold text-center my-12 text-gray-500">
         Explore Available Tuitions
       </h2>

@@ -19,8 +19,8 @@ const Register = () => {
          const photoImg = data.photo[0];
 
     signUpUser(data.email, data.password,)
-      .then((result)=> {
-        console.log('ussr is',result)
+      .then(()=> {
+        
   const formData = new FormData();
       formData.append("image", photoImg);
       const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`;
@@ -54,8 +54,8 @@ photoURL:photoURL
 }
 
 updateUserProfile(userProfile)
-.then(result=>{
-  console.log('user update done',result)
+.then(()=>{
+  
 navigate(location?.state || '/')
 
 
@@ -85,6 +85,7 @@ navigate(location?.state || '/')
 
   return (
     <div className="min-h-screen flex items-center justify-center  px-4 py-4">
+      <title>eTuitionBd-Registration</title>
       <div className="flex flex-col lg:flex-row-reverse items-center w-full max-w-6xl bg-linear-to-br from-green-500 to-red-300 shadow-2xl rounded-3xl overflow-hidden">
 
         <div className=" lg:block lg:w-1/2 bg-linear-to-b from-purple-400 to-indigo-500 text-white p-10 flex flex-col justify-center items-center">
@@ -172,7 +173,7 @@ navigate(location?.state || '/')
                 className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
               />
             </div>
-            <button className="w-full py-3 mt-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
+            <button className="w-full py-3 mt-4 bg-linear-to-r from-purple-500 to-indigo-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition">
               Create an Account
             </button>
           </form>

@@ -18,7 +18,6 @@ const { data: verifiedTutors = [] , refetch} = useQuery({
   }
 });
 
-console.log('verifiedTutors', verifiedTutors)
 
     const handleStatusBadge = (status) => {
         status = status.toLowerCase();
@@ -65,7 +64,6 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
           axiosSecure.patch(`/applications/reject/${appliedTutorId}`)
    .then(res=> {
 
-    // const remainingAppliedTutors = appliedTutors.filter(appliedTutor => appliedTutor._id !== appliedTutorId)
      if(res.data.modifiedCount){
       Swal.fire({
        title: "Rejected!",
@@ -121,6 +119,7 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
 
     return (
         <div className="overflow-x-auto p-4 bg-base-200 rounded-lg shadow-md">
+          <title>eTuitionBd-Dashboard-AppliedTutors</title>
             <h2 className="text-2xl font-bold mb-4 text-center">Applied tutors for my tuitions</h2>
             <table className="table table-zebra w-full">
                 <thead>
@@ -149,20 +148,34 @@ const handleRejectAppliedTutor = async(appliedTutorId)=>{
                             <td>{handleStatusBadge(appliedTutor.status)}</td>
                             <td>{appliedTutor.expectedSalary}</td>
                             <td>{new Date(appliedTutor.date).toLocaleDateString()}</td>
-                            <td className="flex gap-2">
-                               
-                               
-                                    <button onClick={()=>handleApproveAppliedTutor(appliedTutor)} className="btn btn-sm btn-info flex items-center gap-1">
-                                        <FaEdit /> Approve
-                                    </button>
-                              
-                                <button onClick={() => handleRejectAppliedTutor (appliedTutor._id)} className="btn btn-sm btn-warning flex items-center gap-1">
-                                    <FaTrash /> Reject
-                                </button>
-                                <button onClick={() => handleRemoveappliedTutor(appliedTutor._id)} className="btn btn-sm btn-error flex items-center gap-1">
-                                    <FaTrash /> Remove
-                                </button>
-                            </td>
+                          <td>
+  <div className="grid grid-cols-1 gap-2 min-w-[120px]">
+
+    <button
+      onClick={() => handleApproveAppliedTutor(appliedTutor)}
+      className="btn btn-xs bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-1"
+      disabled={appliedTutor.status !== 'approved'}
+    >
+      <FaEdit /> Approve
+    </button>
+
+    <button
+      onClick={() => handleRejectAppliedTutor(appliedTutor._id)}
+      className="btn btn-xs bg-amber-400 hover:bg-amber-500 text-black flex items-center justify-center gap-1"
+    >
+      <FaTimes /> Reject
+    </button>
+
+    <button
+      onClick={() => handleRemoveappliedTutor(appliedTutor._id)}
+      className="btn btn-xs bg-red-500 hover:bg-red-600 text-white flex items-center justify-center gap-1"
+    >
+      <FaTrash /> Remove
+    </button>
+
+  </div>
+</td>
+
                         </tr>
                     ))}
                 </tbody>

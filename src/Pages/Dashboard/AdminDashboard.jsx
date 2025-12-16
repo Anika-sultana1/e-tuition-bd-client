@@ -32,7 +32,7 @@ const AdminDashboard = () => {
    
   axiosSecure.get("/admin/dashboard-stats")
         .then(res=> {
-          console.log('res er data', res.data)
+   
 setStats(res.data);
         })
         

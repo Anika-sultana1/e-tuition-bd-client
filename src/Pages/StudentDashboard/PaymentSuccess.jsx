@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useSearchParams } from 'react-router';
 import { FaCheckCircle } from 'react-icons/fa';
+import Loading from '../../Components/Loading/Loading';
 
 const PaymentSuccess = () => {
   const axiosSecure = useAxiosSecure();
@@ -14,7 +15,7 @@ const PaymentSuccess = () => {
       axiosSecure
         .patch(`/payment-success?session_id=${sessionId}`)
         .then((result) => {
-          console.log(result.data);
+    
           setPayment({
             transactionId: result.data?.transactionId,
             trackingId: result.data?.trackingId,
@@ -24,7 +25,8 @@ const PaymentSuccess = () => {
   }, [sessionId, axiosSecure]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-100 to-green-200 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-r from-green-100 to-green-200 p-4">
+      <title>eTuitionBd-Dashboard-PaymentSuccess</title>
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-lg w-full text-center">
         <FaCheckCircle className="text-green-600 text-6xl mx-auto mb-4 animate-bounce" />
         <h2 className="text-3xl font-bold mb-4 text-green-700">
@@ -43,7 +45,7 @@ const PaymentSuccess = () => {
             </p>
           </div>
         ) : (
-          <p className="text-gray-500">Loading payment info...</p>
+          <Loading></Loading>
         )}
         <button
           onClick={() => window.location.replace('/dashboard')}

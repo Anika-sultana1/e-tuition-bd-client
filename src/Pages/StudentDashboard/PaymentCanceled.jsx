@@ -4,8 +4,8 @@ import { XCircle } from 'lucide-react';
 
 const PaymentCanceled = () => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 to-red-100 px-6">
-            
+        <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-red-50 to-red-100 px-6">
+           <title>eTuitionBd-Dashboard-PaymentCancelled</title> 
             <div className="bg-white shadow-xl rounded-2xl p-10 text-center max-w-md w-full">
                 
                 <XCircle className="mx-auto text-red-500" size={80} />

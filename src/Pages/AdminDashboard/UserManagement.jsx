@@ -40,24 +40,30 @@ const [reasons, setReasons] = useState("");
     photoURL: ''
   });
 
-  // Update user role
+  // update user role
   const handleChangeRole = async (email, newRole) => {
     const res = await axiosSecure.patch(`/users/update/${email}`, { role: newRole });
-    if (res.data.modifiedCount > 0) {
+    if (res.data.modifiedCount) {
       toast.success("Role updated!");
       refetch();
     }
   };
 
-  // Update user info
+  // update user info
   const handleUpdate = async (email) => {
     const updatedData = {};
-    if (openField === "name") updatedData.displayName = formData.name;
-    if (openField === "phoneNumber") updatedData.phoneNumber = formData.phoneNumber;
-    if (openField === "photoURL") updatedData.photoURL = formData.photoURL;
+    if (openField === "name"){
+       updatedData.displayName = formData.name;
+    }
+    if (openField === "phoneNumber"){
+       updatedData.phoneNumber = formData.phoneNumber;
+    }
+    if (openField === "photoURL") {
+      updatedData.photoURL = formData.photoURL;
+    }
 
     const res = await axiosSecure.patch(`/users/update/${email}`, updatedData);
-    if (res.data.modifiedCount > 0) {
+    if (res.data.modifiedCount) {
       toast.success("User updated successfully!");
       refetch();
     }
@@ -74,7 +80,7 @@ const [reasons, setReasons] = useState("");
     });
   };
 
-  // Delete user
+  // delete user
   const handleDeleteUser = (email) => {
     Swal.fire({
       title: "Are you sure?",
@@ -98,17 +104,15 @@ const [reasons, setReasons] = useState("");
   };
 
 const handleVerifyAppliedTutor = async (id) => {
-  try {
-    const res = await axiosSecure.patch(`/applications/verify/${id}`);
-
-    if (res.data.modifiedCount > 0) {
+    axiosSecure.patch(`/applications/verify/${id}`)
+    .then(res=> {
+   if (res.data.modifiedCount) {
       toast.success("Application verified successfully!");
       refetchAppliedTutors(); 
     }
-  } catch (error) {
-    console.log(error);
-    toast.error("Failed to verify application.");
-  }
+    })
+ 
+
 };
 
 const handleReject = async (id) => {
@@ -117,7 +121,7 @@ const handleReject = async (id) => {
       reason: reasons
     });
 
-    if (res.data.modifiedCount > 0) {
+    if (res.data.modifiedCount) {
       toast.success("Application rejected successfully!");
       setOpenRejectModal(null);
       setReasons("");
@@ -131,13 +135,14 @@ const handleReject = async (id) => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
+      <title>eTuitionBd-Dashboard-UserManagement</title>
       <ToastContainer />
       <h3 className="text-4xl font-extrabold mb-8 text-gray-800 text-center">User Management</h3>
 
       {/* Users Table */}
       <div className="overflow-x-auto shadow-lg rounded-lg bg-white mb-8">
         <table className="min-w-full text-left">
-          <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+          <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white">
             <tr>
               <th className="py-3 px-6">#</th>
               <th className="py-3 px-6">Name</th>
@@ -296,13 +301,13 @@ const handleReject = async (id) => {
           <div className="flex gap-3 mt-6">
             <button
               onClick={() => handleVerifyAppliedTutor(tutor._id)}
-              className="flex-1 bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+              className="flex-1 bg-linear-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
             >
               Verify
             </button>
 
             <button
-              className="flex-1 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+              className="flex-1 bg-linear-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
               onClick={() => setOpenRejectModal(tutor._id)}
             >
               Reject

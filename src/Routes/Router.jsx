@@ -16,7 +16,6 @@ import ProfileSettings from "../Pages/StudentDashboard/ProfileSettings";
 import PaymentCanceled from "../Pages/StudentDashboard/PaymentCanceled";
 import PaymentSuccess from "../Pages/StudentDashboard/PaymentSuccess";
 import UpdateTuitions from "../Pages/StudentDashboard/UpdateTuitions";
-import BeATutor from "../Pages/BeATutor/BeATutor";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import PrivateRoutes from "./PrivateRoutes";
 import TutorRoutes from "./TutorRoutes";
@@ -48,10 +47,6 @@ export const router = createBrowserRouter([
         {
             path:'/tutors',
             Component:AllTutors,
-        },
-        {
-            path:'/beATutor',
-            Component:BeATutor,
         },
         {
             path:'/about',

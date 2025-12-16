@@ -15,7 +15,7 @@ const handleSocialLogin = ()=>{
 signInWithGoogle()
 .then( (result)=>{
 
-console.log(result.user)
+
 const data = result.user
     const userInfo = {
           displayName:data.name,
