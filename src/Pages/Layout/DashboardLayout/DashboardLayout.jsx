@@ -4,7 +4,7 @@ import { IoHomeSharp } from 'react-icons/io5';
 import { PiChalkboardTeacherBold } from 'react-icons/pi';
 import { Link, Outlet } from 'react-router';
 import { IoIosSettings, IoMdAnalytics } from "react-icons/io";
-import { MdManageAccounts, MdOutgoingMail, MdOutlineManageHistory, MdOutlinePayments } from "react-icons/md";
+import { MdManageAccounts, MdOutgoingMail, MdOutlineManageHistory, MdOutlinePayments, MdOutlineReviews } from "react-icons/md";
 import { VscGitStashApply } from "react-icons/vsc";
 import { RiFolderHistoryLine } from "react-icons/ri";
 import Logo from '../../../Components/Logo/Logo';
@@ -109,6 +109,12 @@ const DashboardLayout = () => {
                                     <Link to="/dashboard/revenue-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Revenue History">
                                         <RiFolderHistoryLine />
                                         <span className="is-drawer-close:hidden">Revenue History</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/students-reviews" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Students Reviews">
+                                        <MdOutlineReviews />
+                                        <span className="is-drawer-close:hidden">Students Reviews</span>
                                     </Link>
                                 </li>
 

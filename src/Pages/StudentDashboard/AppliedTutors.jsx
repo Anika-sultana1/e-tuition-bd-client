@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { FaCheck, FaEdit, FaHourglassHalf, FaTimes, FaTrash } from 'react-icons/fa';
+import { FaCheck, FaEdit, FaHourglassHalf, FaStar, FaTimes, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
-import { Menu } from '@headlessui/react'; // For 3-dot dropdown
+import { Menu } from '@headlessui/react'; 
+import { Link } from 'react-router';
 
 const AppliedTutors = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+const [rating, setRating] = useState(0);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTuition, setCurrentTuition] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [rating, setRating] = useState(5);
   const [reviewText, setReviewText] = useState('');
 
   const { data: verifiedTutors = [], refetch } = useQuery({
@@ -90,7 +91,7 @@ const AppliedTutors = () => {
     });
   };
 
-  const handleRemoveAppliedTutor = (id) => {
+  const handleRemoveappliedTutor = (id) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -147,17 +148,20 @@ const AppliedTutors = () => {
     e.preventDefault();
     if (!currentTuition) return;
 
+
     const review = {
       tuitionPostId: currentTuition.tuitionPostId,
       tutorEmail: currentTuition.email,
       studentEmail: user?.email,
-      rating,
+      studentName:user?.displayName,
+      subject:currentTuition?.
+tuitionPostSubject,
+      rating:rating,
       reviewText,
     };
 
-    try {
-      const reviewRes = await axiosSecure.post('/reviews', review);
-      if (reviewRes.data.success) {
+   axiosSecure.post('/reviews', review).then(reviewRes=>{
+ if (reviewRes.data.success) {
         Swal.fire({
           title: 'Success',
           text: 'Class marked as completed and review submitted!',
@@ -172,17 +176,18 @@ const AppliedTutors = () => {
         setRating(5);
         setReviewText('');
 
-        // Mark reviewSubmitted to true so 3-dot menu hides Give Review
         refetch();
       }
-    } catch (err) {
+   })
+     
+    .catch( (err) =>{
       console.error(err);
       Swal.fire({
         title: 'Error',
         text: err.response?.data?.message || 'Something went wrong during review submission.',
         icon: 'error',
       });
-    }
+    })
   };
 
   return (
@@ -238,13 +243,27 @@ const AppliedTutors = () => {
   <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right bg-white border rounded shadow-lg focus:outline-none">
     <Menu.Item>
       {({ active }) => (
+    <Link to='/dashboard/chat'>
         <button
-          onClick={() => handleApproveAppliedTutor(appliedTutor)}
+        
           className={`${
             active ? 'bg-gray-100' : ''
           } w-full text-left px-4 py-2`}
         >
-          Approve
+          Send Message
+        </button></Link>
+      )}
+    </Menu.Item>
+    <Menu.Item>
+      {({ active }) => (
+        <button
+          onClick={() => handleApproveAppliedTutor(appliedTutor)}
+          disabled={appliedTutor.paymentStatus==='paid'}
+          className={`${
+            active ? 'bg-gray-100' : ''
+          } w-full text-left px-4 py-2`}
+        >
+        Approve
         </button>
       )}
     </Menu.Item>
@@ -341,6 +360,24 @@ const AppliedTutors = () => {
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Review for {currentTuition.name}</h3>
+
+
+<div className="flex gap-1 mb-3">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setRating(star)}
+                  className={`text-3xl ${
+                    star <= rating
+                      ? 'text-yellow-400'
+                      : 'text-gray-300'
+                  }`}
+                >
+                  <FaStar></FaStar>                </button>
+              ))}
+            </div>
+
 
             <form onSubmit={handleSubmitReview} className="space-y-3">
               <label className="block">

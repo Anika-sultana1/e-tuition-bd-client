@@ -29,6 +29,8 @@ import TuitionManagement from "../Pages/AdminDashboard/TuitionManagement";
 import ReportAnalytics from "../Pages/AdminDashboard/ReportAnalytics";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import StudentsReviews from "../Pages/TutorDashboard/StudentsReviews";
+import Chat from "../Pages/StudentDashboard/Chat";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +86,10 @@ export const router = createBrowserRouter([
         element:<PrivateRoutes><MyTuitions></MyTuitions></PrivateRoutes>
       },
       {
+        path:'chat',
+        element:<PrivateRoutes><Chat></Chat></PrivateRoutes>
+      },
+      {
         path: 'postTuition',
        element:<PrivateRoutes><PostTuition></PostTuition></PrivateRoutes>
       },
@@ -124,6 +130,10 @@ export const router = createBrowserRouter([
       {
         path:'revenue-history',
         element:<TutorRoutes><RevenueHistory></RevenueHistory></TutorRoutes>
+      },
+      {
+        path:'students-reviews',
+        element:<TutorRoutes><StudentsReviews></StudentsReviews></TutorRoutes>
       },
       {
         path:'user-management',
