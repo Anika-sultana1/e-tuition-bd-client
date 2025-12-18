@@ -56,9 +56,10 @@ navigate('/dashboard/myTuitions')
                         type="text"
                         {...register('name',{required:true})}
                         placeholder="Enter Your Name"
+                        value={user?.displayName}
                         className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
-                    {errors.email && <p className='text-red'>Email is required</p>}
+                    {errors.email && <p className='text-red'>Name is required</p>}
                 </div>
                    {/* email*/}
                 <div>
@@ -70,7 +71,7 @@ navigate('/dashboard/myTuitions')
                         value={user?.email}
                         className="input input-bordered input-lg w-full rounded-xl shadow-sm focus:ring-2 focus:ring-purple-400"
                     />
-                    {errors.name && <p className='text-red'>Name is required</p>}
+                    {errors.name && <p className='text-red'>Email is required</p>}
                 </div>
    
               

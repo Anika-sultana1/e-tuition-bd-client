@@ -243,7 +243,7 @@ tuitionPostSubject,
   <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right bg-white border rounded shadow-lg focus:outline-none">
     <Menu.Item>
       {({ active }) => (
-    <Link to='/dashboard/chat'>
+    <Link  to={`/dashboard/chat?with=${appliedTutor.email}&name=${appliedTutor.name}`}>
         <button
         
           className={`${

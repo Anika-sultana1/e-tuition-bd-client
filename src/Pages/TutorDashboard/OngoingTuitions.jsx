@@ -2,10 +2,10 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loading from '../../Components/Loading/Loading';
+import { Link } from 'react-router';
 
 const OngoingTuitions = () => {
   const axiosSecure = useAxiosSecure();
-
   const { data: ongoingTuitions = [], isLoading } = useQuery({
     queryKey: ['ongoingTuitions'],
     queryFn: async () => {
@@ -13,6 +13,9 @@ const OngoingTuitions = () => {
       return res.data;
     }
   });
+
+
+
 
   if (isLoading) {
     return <Loading></Loading>
@@ -34,6 +37,7 @@ const OngoingTuitions = () => {
             <th>Location</th>
             <th>Tracking ID</th>
             <th>Payment Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
     <tbody>
@@ -47,7 +51,11 @@ const OngoingTuitions = () => {
       <td>{tuition.tuitionPostTime}</td>
       <td>{tuition.tutionPostLocation}</td>
       <td>{tuition.trackingId}</td>
-      <td>{tuition.tuitionPostPaymentStatus}</td>
+      <td>{tuition.tuitionPostClassStatus}</td>
+      <td>
+        <Link  to={`/dashboard/chat?with=${tuition?.tuitionPostEmail}&name=${tuition?.tuitionPostName}`}><button>Send Message</button></Link>
+        
+      </td>
     </tr>
   )) : <tr><td colSpan="9">No ongoing tuitions found</td></tr>}
 </tbody>

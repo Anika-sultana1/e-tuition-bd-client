@@ -18,8 +18,8 @@ const Register = () => {
   const handleSignInUser = (data) => {
 
     signInUser(data.email, data.password)
-      .then(result => {
-        console.log(result.user)
+      .then(() => {
+      
         navigate(location?.state || '/')
       })
       .catch(err=> {
@@ -97,7 +97,7 @@ forgetPassword(email)
                 Login
               </button>
             </form>
-            <p className="text-center text-gray-500 text-sm mt-4">
+            <p className="text-center text-gray-500 text-sm my-4">
               New to Our Website? Please
               <Link className='text-black underline m-2' to='/register'>Register</Link>
             </p>

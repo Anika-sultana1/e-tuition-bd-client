@@ -8,7 +8,7 @@ import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
 
 const Home = () => {
   return (
-    <div className="space-y-20">
+    <div className=" bg-gray-300">
 <title>eTuitionBd-Home</title>
       {/* Hero */}
       <motion.div

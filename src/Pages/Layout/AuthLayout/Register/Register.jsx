@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../Hooks/useAuth';
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+// import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useAxios from '../../../../Hooks/useAxios'
 
@@ -12,7 +12,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { signUpUser,updateUserProfile, } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   const axios = useAxios();
   const handleUserRegister = (data) => {
 
@@ -36,7 +36,7 @@ const photoURL = result.data.data.url
           phoneNumber: data.phoneNumber,
           role:data.role,
         }
-        axiosSecure.post('/users', userInfo)
+        axios.post('/users', userInfo)
           .then(res => {
             if (res.data.insertedId) {
               Swal.fire({
@@ -152,17 +152,24 @@ navigate(location?.state || '/')
               />
               {errors.password?.type === 'pattern' && <p className='text-red-400'>Password must contain upper, lower, number & be 6+ characters</p>}
             </div>
-            <div>
-              {/* role  */}
-              <label className="block text-gray-700 font-medium">Your Role</label>
-              <input
-                type="text"
-                {...register('role', { required: true })}
-                placeholder="Student/Tutor"
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
-              />
-              {errors.role && <p className='text-red-400'> Role is required </p>}
-            </div>
+  <div>
+  {/* role  */}
+  <label className="block text-gray-700 font-medium">Your Role</label>
+  <input
+    type="text"
+    {...register('role', { 
+      required: 'Role is required',
+      pattern: {
+        value: /^[a-z]+$/,
+        message: 'Role must be in lowercase'
+      }
+    })}
+    placeholder="student/tutor"
+    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+  />
+  {errors.role && <p className='text-red-400'>{errors.role.message}</p>}
+</div>
+
             <div>
               {/* Name  */}
               <label className="block text-gray-700 font-medium">Phone</label>
@@ -178,7 +185,7 @@ navigate(location?.state || '/')
             </button>
           </form>
 
-          <p className="text-center text-gray-500 text-sm mt-4">
+          <p className="text-center text-gray-500 text-sm my-4">
             Already have an account?{' '}
             <Link className='text-black underline m-2' to='/login'>Login</Link>
           </p>

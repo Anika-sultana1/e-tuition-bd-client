@@ -81,7 +81,7 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
             </p>
 
             <p className="text-gray-600 mb-1">
-              <span className="font-medium">Phone:</span> {t.phoneNumber}
+              <span className="font-medium">Phone:</span> {t.location}
             </p>
             <p className="text-gray-600 mb-3">
               <span className="font-medium">Days:</span> {t.days}
@@ -93,22 +93,24 @@ const pendingTuitions = tuitions.filter(t => t.status === 'pending');
              >
               
             </Reviw>
+{t.status === "pending" && (
+  <div className="flex gap-3 mt-4">
+    <button
+      onClick={() => handleAction(t._id, "approve")}
+      className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+    >
+      <FaCheck /> Approve
+    </button>
 
-            <div className="flex gap-3 mt-4">
-              <button
-                onClick={() => handleAction(t._id, "approve")}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-              >
-                <FaCheck /> Approve
-              </button>
+    <button
+      onClick={() => handleAction(t._id, "reject")}
+      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+    >
+      <FaTimes /> Reject
+    </button>
+  </div>
+)}
 
-              <button
-                onClick={() => handleAction(t._id, "reject")}
-                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
-              >
-                <FaTimes /> Reject
-              </button>
-            </div>
           </div>
         ))}
       </div>

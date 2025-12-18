@@ -17,7 +17,7 @@ const LatestTutors = () => {
   const { data: tutors = [] } = useQuery({
     queryKey: ['tutors'],
     queryFn: async () => {
-      const res = await axios.get('/tutors?limit=8');
+      const res = await axios.get('/tutorsApplications?limit=8');
       return res.data;
     }
   });
@@ -94,13 +94,34 @@ const LatestTutors = () => {
         </div>
 
         <h3 className="text-xl font-semibold text-center text-gray-800 mb-1">{tutor.name}</h3>
-        <p className="text-center text-gray-500 mb-3 text-sm">{tutor.intro}</p>
+        <p className="text-center text-gray-500 mb-3 text-sm">Qualifications: {tutor.
+qualifications}</p>
 
         <div className="text-center text-gray-600 text-sm space-y-1">
-          <p><span className="font-medium">Subjects:</span> {tutor.subjects.join(", ")}</p>
-          <p><span className="font-medium">Experience:</span> {tutor.experience}</p>
-          <p><span className="font-medium">Location:</span> {tutor.location}</p>
-          {tutor.rating && <p><span className="font-medium">Rating:</span> {tutor.rating} <FaStar></FaStar></p>}
+          <p><span className="font-medium">Subjects:</span> {tutor.
+tuitionPostSubject}</p>
+          <p><span className="font-medium">Experience:</span> {tutor.
+experience}</p>
+          <p><span className="font-medium">Location:</span> {tutor.expectedSalary}</p>
+       {tutor.rating && (
+  <div className="flex items-center justify-center gap-1 mt-2">
+    {[...Array(5)].map((_, index) => (
+      <FaStar
+        key={index}
+        className={
+          index < Math.round(tutor.rating)
+            ? "text-yellow-400"
+            : "text-gray-300"
+        }
+        size={14}
+      />
+    ))}
+    <span className="ml-2 text-sm text-gray-600">
+      ({tutor.rating})
+    </span>
+  </div>
+)}
+
         </div>
 
         

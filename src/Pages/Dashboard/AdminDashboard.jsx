@@ -3,11 +3,21 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaUsers, FaBook, FaDollarSign } from "react-icons/fa";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import AdminStatCard from "./AdminStatCard";
+import { useQuery } from "@tanstack/react-query";
 
 const AdminDashboard = () => {
 
   const axiosSecure = useAxiosSecure(); 
   
+  const {data:users=[]} = useQuery({
+    queryKey: ['users'], 
+    queryFn: async()=>{
+      const res = await axiosSecure.get('/users')
+      return res.data
+    }
+  })
+
+
   const [stats, setStats] = useState({
     totalUsers: 0,
     activeUsers: 0,

@@ -105,7 +105,7 @@ const handleRemoveTuition = (id)=>{
             <th>Status</th>
             <th> Payment Status</th>
             <th>Salary</th>
-            <th>Phone</th>
+
             <th>Days</th>
             <th>Time</th>
             <th>Actions</th>
@@ -125,9 +125,9 @@ const handleRemoveTuition = (id)=>{
               </td>
               
               <td>{tuition.budget}</td>
-              <td>{tuition.phoneNumber}</td>
+            
               <td>{tuition.days}</td>
-              <td>{tuition.time}</td>
+              <td>{tuition.timing}</td>
               <td className="flex gap-2">
                <Link to={`../updateTuition/${tuition._id}`}> <button className="btn btn-sm btn-info flex items-center gap-1">
                   <FaEdit /> Edit

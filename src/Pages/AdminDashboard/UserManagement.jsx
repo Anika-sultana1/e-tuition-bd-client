@@ -157,7 +157,7 @@ const handleReject = async (id) => {
             </tr>
           </thead>
           <tbody>
-            {users.filter(u => u.role !== "admin").map((u, index) => (
+            {users.filter(u => u.role !== "admin").slice(0, 10).reverse().map((u, index) => (
               <tr key={u._id} className="border-b hover:bg-gray-50">
                 <td className="py-4 px-6">{index + 1}</td>
                 <td className="py-4 px-6">{u.displayName}</td>
@@ -256,7 +256,7 @@ const handleReject = async (id) => {
 
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {appliedTutors.length > 0 ? (
-      appliedTutors.map((tutor) => (
+      appliedTutors.filter(tutor => tutor.verifyStatus === "not verified").map((tutor) => (
         <div
           key={tutor._id}
           className="p-6 bg-white dark:bg-gray-800 shadow-lg rounded-2xl border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
@@ -297,22 +297,24 @@ const handleReject = async (id) => {
             </p>
           </div>
 
-      
-          <div className="flex gap-3 mt-6">
-            <button
-              onClick={() => handleVerifyAppliedTutor(tutor._id)}
-              className="flex-1 bg-linear-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
-            >
-              Verify
-            </button>
+     {tutor.status === "pending" && (
+  <div className="flex gap-3 mt-6">
+    <button
+      onClick={() => handleVerifyAppliedTutor(tutor._id)}
+      className="flex-1 bg-linear-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+    >
+      Verify
+    </button>
 
-            <button
-              className="flex-1 bg-linear-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
-              onClick={() => setOpenRejectModal(tutor._id)}
-            >
-              Reject
-            </button>
-          </div>
+    <button
+      onClick={() => setOpenRejectModal(tutor._id)}
+      className="flex-1 bg-linear-to-r from-red-500 to-red-700 text-white font-semibold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+    >
+      Reject
+    </button>
+  </div>
+)}
+
 
           {/* Reject Modal */}
           {openRejectModal === tutor._id && (

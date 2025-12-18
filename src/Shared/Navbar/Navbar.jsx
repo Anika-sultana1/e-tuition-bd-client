@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../Components/Logo/Logo';
-import { NavLink, useNavigate } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth'
 import Swal from 'sweetalert2';
 import { FaRegMoon, FaSun, FaUserCircle } from 'react-icons/fa';
@@ -113,6 +113,7 @@ const handleSignOut = ()=>{
   user ? (
     <div className="flex items-center gap-2">
    
+    <Link to='/dashboard/profile-settings'>
       <div className="avatar">
         <div className="w-8 rounded-full ">
           <img
@@ -120,7 +121,7 @@ const handleSignOut = ()=>{
             alt={user.displayName || "User"}
           />
         </div>
-      </div>
+      </div></Link>
 
 
       <button

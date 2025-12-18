@@ -14,6 +14,8 @@ const TuitionDetailsPage = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
+  const [alreadyApplied, setAlreadyApplied] = useState(false);
+
   const [selectedTuition, setSelectedTuition] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
@@ -39,7 +41,12 @@ const TuitionDetailsPage = () => {
       return Swal.fire({
         icon: "warning",
         title: "Please login first!",
-      }).then(() => navigate("/login"));
+      })
+      .then(() =>(
+         navigate("/login")
+      ))
+
+
     }
 
     setSelectedTuition(tuition);
@@ -60,35 +67,40 @@ const TuitionDetailsPage = () => {
       tuitionPostBudget: tuition?.budget,
       tuitionPostLocation: tuition?.location,
       tuitionPostDays: tuition?.days,
-  
+  tuitionPostEmail:tuition?.email,
       tuitionPostTime: tuition?.timing,
     tuitionPostClassStatus: tuition?.classStatus,
       status: "pending",
       date: new Date(),
     };
 
-    axiosSecure
-      .post("/applications", tutorInfo)
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire({
-            icon: "success",
-            title: "Application submitted!",
-            timer: 1200,
-            showConfirmButton: false,
-          });
-
-          setOpenModal(false);
-          refetch();
-        }
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Already Applied",
-          text: err?.response?.data?.message || err.message,
-        });
+axiosSecure.post("/applications", tutorInfo)
+  .then((res) => {
+    if (res.data.insertedId) {
+      Swal.fire({
+        icon: "success",
+        title: "Application submitted!",
+        timer: 1200,
+        showConfirmButton: false,
       });
+
+      setAlreadyApplied(true);  
+      setOpenModal(false);
+      refetch();
+    }
+  })
+  .catch((err) => {
+    if (err?.response?.status === 400) {
+      setAlreadyApplied(true);   // ✅ already applied
+    }
+
+    Swal.fire({
+      icon: "error",
+      title: "Already Applied",
+      text: err?.response?.data?.message || err.message,
+    });
+  });
+
   };
 
   if (isLoading)
@@ -145,15 +157,21 @@ const TuitionDetailsPage = () => {
 
         </div>
 
-        {/* Apply */}
-        <button
-          onClick={handleApply}
-          className="w-full mt-8 py-3 text-lg font-semibold text-white rounded-2xl
-          bg-linear-to-r from-blue-500 to-blue-700 shadow-xl hover:from-blue-600 hover:to-blue-800
-          flex justify-center items-center gap-2 transition-all active:scale-95"
-        >
-          <FaPaperPlane /> Apply Now
-        </button>
+{!alreadyApplied ? (
+  <button
+    onClick={handleApply}
+    className="w-full mt-8 py-3 text-lg font-semibold text-white rounded-2xl
+    bg-linear-to-r from-blue-500 to-blue-700 shadow-xl hover:from-blue-600 hover:to-blue-800
+    flex justify-center items-center gap-2 transition-all active:scale-95"
+  >
+    <FaPaperPlane /> Apply Now
+  </button>
+) : (
+  <div className="w-full mt-8 py-3 text-center rounded-2xl bg-green-100 text-green-700 font-semibold">
+     You already applied for this tuition
+  </div>
+)}
+
       </div>
 
       {/* MODAL */}
