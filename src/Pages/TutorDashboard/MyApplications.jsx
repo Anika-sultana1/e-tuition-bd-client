@@ -121,11 +121,11 @@ const handleUpdateApplication = async (e) => {
               <th>Posted Name</th>
               <th>Subject</th>
               <th>Class</th>
-              <th>Location</th>
+            
               <th>Status</th>
               <th>Payment</th>
               <th>Salary</th>
-              <th>Phone</th>
+          
               <th>Days</th>
               <th>Time</th>
               <th>Actions</th>
@@ -140,11 +140,11 @@ const handleUpdateApplication = async (e) => {
                 <td>{application.tuitionPostName}</td>
                 <td>{application.tuitionPostSubject}</td>
                 <td>{application.tuitionPostClass}</td>
-                <td>{application.tutionPostLocation}</td>
+            
                 <td>{handleStatusBadge(application.status)}</td>
-                <td>{application.tuitionPostPaymentStatus}</td>
+                <td>{application.tuitionPostPaymentStatus || 'not paid'}</td>
                 <td>{application.tuitionPostBudget}</td>
-                <td>{application.phoneNumber}</td>
+             
                 <td>{application.tuitionPostDays}</td>
                 <td>{application.tuitionPostTime}</td>
 

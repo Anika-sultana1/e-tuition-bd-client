@@ -20,11 +20,11 @@ const [rating, setRating] = useState(0);
   const { data: verifiedTutors = [], refetch } = useQuery({
     queryKey: ['verifiedTutors'],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/applications/verified?email=${user?.email}`);
+      const res = await axiosSecure.get(`/applications/verified`);
       return res.data;
     },
   });
-
+console.log('verifiedTutors', verifiedTutors)
   const handleStatusBadge = (status) => {
     if (!status) return <span className="badge">Unknown</span>;
     status = status.toLowerCase();

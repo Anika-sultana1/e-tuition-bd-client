@@ -16,7 +16,6 @@ const OngoingTuitions = () => {
 
 
 
-
   if (isLoading) {
     return <Loading></Loading>
   };
@@ -49,7 +48,7 @@ const OngoingTuitions = () => {
       <td>{tuition.tuitionPostClass}</td>
       <td>{tuition.tuitionPostDays}</td>
       <td>{tuition.tuitionPostTime}</td>
-      <td>{tuition.tutionPostLocation}</td>
+      <td>{tuition.tuitionPostLocation}</td>
       <td>{tuition.trackingId}</td>
       <td>{tuition.tuitionPostClassStatus}</td>
       <td>
